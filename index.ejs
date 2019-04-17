@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="utf-8">
+        <title>
+            <%- htmlWebpackPlugin.options.metadata.title %>
+        </title>
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <base href="<%- htmlWebpackPlugin.options.metadata.baseUrl %>">
+        <script>
+            // object.entries.polyfill.js
+            
+            if (!Object.entries) {
+              Object.entries = function(obj) {
+                var ownProps = Object.keys(obj),
+                    i = ownProps.length,
+                    resArray = new Array(i); // preallocate the Array
+                while (i--) {
+                  resArray[i] = [ownProps[i], obj[ownProps[i]]];
+                }
+                
+                return resArray;
+              }
+            }
+        </script>
+        <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.0/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-9gVQ4dYFwwWSjIDZnLEWnxCjeSWFphJiwGPXr1jddIhOegiu1FwO5qRGvFXOdJZ4" crossorigin="anonymous"></link>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.0-beta/css/bootstrap-select.min.css"></link>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css" rel="stylesheet"></link>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.17.0/slimselect.min.js"></script>
+        <link href="https://cdnjs.cloudflare.com/ajax/libs/slim-select/1.17.0/slimselect.min.css" rel="stylesheet"></link>
+        <!-- imported CSS are concatenated and added automatically -->
+
+        <script>
+            var escape = function(value) {
+              return !value ? '' : value
+                .replace(/\\/g, '\\\\').replace(/\"/g, '\\"')
+                .replace(/\//g, '\/\/').replace(/[\b]/g, '\\b')
+                .replace(/\f/g, '\\f').replace(/\n/g, '\\n')
+                .replace(/\r/g, '\\r').replace(/\t/g, '\\t');
+            };
+            var XHR = window.XMLHttpRequest || function() {
+              try { return new ActiveXObject("Msxml3.XMLHTTP"); } catch (e0) {}
+              try { return new ActiveXObject("Msxml2.XMLHTTP.6.0"); } catch (e1) {}
+              try { return new ActiveXObject("Msxml2.XMLHTTP.3.0"); } catch (e2) {}
+              try { return new ActiveXObject("Msxml2.XMLHTTP"); } catch (e3) {}
+              try { return new ActiveXObject("Microsoft.XMLHTTP"); } catch (e4) {}
+            };
+            window.onerror = function(message, source, line, column, error) {
+              try {
+                var xhr = new XHR();
+                xhr.open('POST', '/errors', true);
+                xhr.setRequestHeader('Content-type', 'application/json');
+                xhr.send('{ ' +
+                         '"message": "' + escape(message || '') + '",' +
+                         '"stackTrace": "' + escape(error ? error.stack || '' : '') + '",' +
+                         '"source": "' + escape(source || '') + '",' +
+                         '"url": "' + escape(window.location.href) + '",' +
+                         '"line": "' + (line || 0) + '",' +
+                         '"column": "' + (column || 0) + '"' +
+                         '}');
+              }
+              finally {
+                // Display a friendly message to the user.
+                alert(message);
+              }
+
+              return false;
+            };
+        </script>
+    </head>
+
+    <body>
+
+        <div aurelia-app="main" id="main-app">
+            <% if (htmlWebpackPlugin.options.metadata.server) { %>
+            <!-- Webpack Dev Server reload -->
+            <script src="/webpack-dev-server.js"></script>
+            <% } %>
+        </div>
+    </body>
+
+</html>
