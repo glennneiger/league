@@ -1,6 +1,11 @@
 import {inject} from 'aurelia-framework';
 import { autoinject } from 'aurelia-framework';
-
+/**
+ * RadReport 2.0
+ *
+ * @author Michael Crabtree
+ * @author Derrick Lottich
+ */
 import { Router, RouterConfiguration } from 'aurelia-router';
 import { PLATFORM } from 'aurelia-pal';
 import { Configuration } from './config';
@@ -39,19 +44,9 @@ export class App {
 			{
 				route: 'league',
 				//Hotloading 
-				moduleId: PLATFORM.moduleName('./components/create-league/create-league', 'create-league'),
+				moduleId: PLATFORM.moduleName('./components/create-league/create-league', 'home'),
 				title: 'league',
 				name: 'league',
-				settings: {
-					scrollToTop: false,
-				},
-			},
-			{
-				route: 'draft',
-				//Hotloading 
-				moduleId: PLATFORM.moduleName('./components/draft/draft', 'draft'),
-				title: 'draft',
-				name: 'draft',
 				settings: {
 					scrollToTop: false,
 				},

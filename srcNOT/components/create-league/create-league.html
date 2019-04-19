@@ -2,7 +2,7 @@
     <div class="container-fluid">
         <div class="content">
             <div class="d-flex justify-content-center align-items-center">
-                <form submit.delegate="createLeague()" class="league-form d-flex flex-column justify-content-center">
+                <form submit.bind="createLeague()" class="league-form d-flex flex-column justify-content-center">
                     <h1>Create New League</h1>
                     <div class="form-group">
                         <label for="league-name">League Name</label>
@@ -18,8 +18,8 @@
                                 </div>
                             </div>
                             <ul class="list-group">
-                                <li class="list-group-item d-flex justify-content-between align-items-center" repeat.for="team of teams">
-                                    <span>${team.name}</span>
+                                <li class="list-group-item d-flex justify-content-between align-items-center" repeat.for="team of season.teams">
+                                    <span>${team}</span>
                                     <span click.delegate="removeTeam($index)"><i class="fa fa-trash-o"></i></span>
                                 </li>
                             </ul>

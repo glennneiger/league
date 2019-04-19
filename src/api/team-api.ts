@@ -3,18 +3,20 @@ import { HttpClient, json } from 'aurelia-fetch-client';
 import { Configuration } from '../config';
 
 @autoinject()
-export class LeagueApi{
+export class TeamApi{
 	constructor(private http){
 		this.http = new HttpClient();
 	}
 	
-	public async createLeague(league){
-		let path = "leagues";
+	public async createTeams(teams){
+		let path = "teams";
 		path = Configuration.getBaseURI() + path;
-		console.log(path)
+		console.log(teams)
 		return await this.http.fetch(path, {
             method: 'POST',
-            body: JSON.stringify(league)
+            body: JSON.stringify({
+                teams: teams
+            })
 		})
 		.then((response) => response.json())
 	}
